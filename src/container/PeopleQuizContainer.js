@@ -89,6 +89,12 @@ export default function PeopleQuizContainer() {
         }
     }
 
+    const handleNotClick = () =>{
+        if (index < peopleContent.length-1){
+            setIndex(index+1);
+        }
+    }
+
     return (
         <PageWrap>
             <MenuBar menuName={'인물 퀴즈'}/>
@@ -109,7 +115,7 @@ export default function PeopleQuizContainer() {
                 text3={`${teamName.team3} 정답`}
                 checked1={true}
             />
-            <Button>아무도 못맞춤</Button>
+            <Button onClick={handleNotClick}>아무도 못맞춤</Button>
         </PageWrap>
     )
 }
