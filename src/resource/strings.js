@@ -1,19 +1,20 @@
 export const menuList={
     mainMenuList:[
-        {text:'몸으로 말해요',url:'/body'},
-        {text:'인물 퀴즈',url:'/people'},
+        {text:'몸으로 말해요',detail:'몸으로 단어 설명하기, 말하기 절대 금지!!',url:'/body'},
+        {text:'인물 퀴즈',detail:'사진에 나오는 인물/캐릭터/영화속 인물 등을 맞춰보세요',url:'/team'},
     ],
     bodyLanguageSubject:[
         {text:'동물/곤충',value: 'animal', difficulty:'상', detail: '10문제, 배점 높음',url:'/quiz/body/animal'},
         {text:'영화',value: 'movie', difficulty:'중', detail: '15문제, 배점 낮음',url:'/quiz/body/movie'},
         {text:'감정/기분/표정/욕구',value: 'emotion', difficulty:'하', detail: '20문제, 배점 매우 낮음',url:'/quiz/body/emotion'},
     ],
-    peopleQuizSubject:[
-        {text:'그룹1',value: 'group1', difficulty:'중', detail: '10문제',url:'/quiz/people/group1'},
-        {text:'그룹2',value: 'group2', difficulty:'중', detail: '10문제',url:'/quiz/people/group2'},
-        {text:'그룹3',value: 'group3', difficulty:'중', detail: '10문제',url:'/quiz/people/group3'},
-    ],
 }
+
+export const teamText = [
+    {key:'team1', placeholder:'팀 1의 팀명을 입력하세요'},
+    {key:'team2', placeholder:'팀 2의 팀명을 입력하세요'},
+    {key:'team3', placeholder:'팀 3의 팀명을 입력하세요'},
+];
 
 export const bodyLanguageContent={
     animal:[
@@ -69,3 +70,53 @@ export const bodyLanguageContent={
         {text:'간지러움',score:'5'},
     ]
 }
+
+export const peopleContent=[
+    {text:'모모', url:'momo.jpg'},
+    {text:'강다니엘', url:'강다니엘.jpg'},
+    {text:'강하늘', url:'강하늘.jpg'},
+    {text:'거미', url:'거미.jpg'},
+    {text:'고두심', url:'고두심.jpg'},
+    {text:'기안84', url:'기안84.jpg'},
+    {text:'기안84', url:'기안84.jpg'},
+    {text:'김연아', url:'김연아.png'},
+    {text:'김연자', url:'김연자.jpg'},
+    {text:'김우빈', url:'김우빈.jpg'},
+    {text:'나문희', url:'나문희.jpg'},
+    {text:'노사연', url:'노사연.jpg'},
+    {text:'빵상 아줌마', url:'다운로드.jpg'},
+    {text:'다현', url:'다현.jpg'},
+    {text:'디카프리오', url:'디카프리오.png'},
+    {text:'라이언', url:'라이언.png'},
+    {text:'마릴린먼로', url:'마릴린먼로.jpg'},
+    {text:'모차르트', url:'모차르트.jpg'},
+    {text:'문재인', url:'문재인.jpg'},
+    {text:'박건후', url:'박건후.png'},
+    {text:'박보검', url:'박보검.jpg'},
+    {text:'뿡뿡이', url:'방귀대장뿡뿡이.jpg'},
+    {text:'베토벤', url:'베토벤.jpg'},
+    {text:'보아', url:'보아.jpg'},
+    {text:'세일러문', url:'세일러문.jpg'},
+    {text:'세종대왕', url:'세종대왕.jpg'},
+    {text:'손흥민', url:'손흥민.jpg'},
+    {text:'송가인', url:'송가인.jpg'},
+    {text:'송은이', url:'송은이.jpg'},
+    {text:'송중기', url:'송중기.jpg'},
+    {text:'아만다 사이프리드', url:'아만다 사이프리드.jpg'},
+    {text:'아이린', url:'아이린.jpg'},
+    {text:'어피치', url:'어피치.jpg'},
+    {text:'엠마왓슨', url:'엠마왓슨.png'},
+    {text:'예리', url:'예리.jpg'},
+    {text:'예성', url:'예성.jpg'},
+    {text:'육성재', url:'육성재.jpg'},
+    {text:'이순재', url:'이순재.jpg'},
+    {text:'이효리', url:'이효리.jpg'},
+    {text:'장윤주', url:'장윤주.jpg'},
+    {text:'저스틴비버', url:'저스틴비버.jpg'},
+    {text:'전지현', url:'전지현.jpg'},
+    {text:'전진', url:'전진.jpg'},
+    {text:'조세호', url:'조세호.jpg'},
+    {text:'조이', url:'조이.jpg'},
+    {text:'한혜진', url:'한혜진.jpg'},
+    {text:'조정석', url:'조정석.jpg'},
+]

@@ -1,87 +1,115 @@
 import ButtonGroup from "../component/ButtonGroup";
 import {useLocation, useNavigate} from "react-router-dom";
-import {bodyLanguageContent, menuList} from "../resource/strings";
+import {bodyLanguageContent, menuList, peopleContent} from "../resource/strings";
 import {useEffect, useState} from "react";
-import {viewWidthCalc} from "../utils/ViewportCalculate";
+import {viewHeightCalc, viewWidthCalc} from "../utils/ViewportCalculate";
 import styled from "styled-components";
+import MenuBar from "../component/MenuBar";
+import {Button} from "@mui/material";
+
+const PageWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+`
 
 const ContentWrap = styled.div`
   display: flex;
   justify-content: center;
 `
 
-const ContentText = styled.h1`
-  font-size: ${viewWidthCalc(200, {})}
+const ImgWrap = styled.img`
+  height: ${viewHeightCalc(720,{})};
 `
 
 const TitleWrap = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
 `
 
 export default function PeopleQuizContainer() {
-    const location = useLocation();
     const navigate = useNavigate();
-    const subject = menuList.bodyLanguageSubject.find(item => item.url === location.pathname).text;
-    const [contentList, setContentList] = useState(bodyLanguageContent[menuList.bodyLanguageSubject.find(item => item.url === location.pathname).value]);
-    const [content, setContent] = useState(contentList[0]);
+    const teamName = JSON.parse(localStorage.getItem('team')) || {};
+    const [score, setScore] = useState(JSON.parse(localStorage.getItem('teamScore'))||{
+        team1: 0,
+        team2: 0,
+        team3: 0,
+    });
+    const [image, setImage] = useState(localStorage.getItem('imageUrl')||peopleContent[0].url)
     const [index, setIndex] = useState(Number(localStorage.getItem('index')) || 0);
-    const [score, setScore] = useState(Number(Number(localStorage.getItem('score')) || 0));
-    const [passContentList, setPassContentList] = useState(JSON.parse(localStorage.getItem('passContent')) || []);
 
     useEffect(() => {
-        localStorage.setItem('index', index.toString())
-        setContent(() => contentList[index]);
-        if (Number(index) > contentList.length - 1) {
-            navigate('/score');
-        }
-    }, [index])
+        localStorage.setItem('teamScore', JSON.stringify(score))
+    },[score])
 
-    //변경된 score 저장하기
     useEffect(() => {
-        localStorage.setItem('score', score.toString());
-    }, [score])
+        setImage(peopleContent[index].url)
+    },[index])
 
-    //변경된 pass 항목 저장하기
     useEffect(() => {
-        localStorage.setItem('passContent', JSON.stringify(passContentList));
-    }, [passContentList])
+        localStorage.setItem('imageUrl', image.toString())
+    },[image])
 
-    const handlePassButtonClick = () => {
-        if (index < contentList.length) {
-            setIndex(() => index + 1);
-        }
-        setContentList(prevState => prevState.concat(content))
-    }
-
-    const handleCorrectButtonClick = () => {
-        if (index < contentList.length) {
-            setIndex(() => index + 1);
-        }
-        setScore(prevState => prevState + Number(content.score))
-    }
-
+    //team1 점수 획득
     const handleBackButtonClick = () => {
-        if (index > 0) {
-            setIndex(() => index - 1);
+        if (index < peopleContent.length-1){
+            setScore(prevState => (
+                {
+                    ...prevState,
+                    team1: prevState.team1 + 10
+                }
+            ));
+            setIndex(index+1);
         }
     }
 
-    console.log(contentList)
+    //team2 점수 획득
+    const handlePassButtonClick = () => {
+        if (index < peopleContent.length-1){
+            setScore(prevState => (
+                {
+                    ...prevState,
+                    team2: prevState.team2 + 10
+                }
+            ));
+            setIndex(index+1);
+        }
+    }
+
+    //team3 점수 획득
+    const handleCorrectButtonClick = () => {
+        if (index < peopleContent.length-1){
+            setScore(prevState => (
+                {
+                    ...prevState,
+                    team3: prevState.team3 + 10
+                }
+            ));
+            setIndex(index+1);
+        }
+    }
+
     return (
-        <>
+        <PageWrap>
+            <MenuBar menuName={'인물 퀴즈'}/>
             <TitleWrap>
-                <h2>주제: {subject}</h2>
-                <h2>현재 점수: {score}</h2>
+                <h2>{teamName.team1}: {score.team1}</h2>
+                <h2>{teamName.team2}: {score.team2}</h2>
+                <h2>{teamName.team3}: {score.team3}</h2>
             </TitleWrap>
             <ContentWrap>
-                <ContentText>{content.text}</ContentText>
+                <ImgWrap src={`/images/${image}`} alt={'인물'}/>
             </ContentWrap>
             <ButtonGroup
                 onBackButtonClick={handleBackButtonClick}
                 onPassButtonClick={handlePassButtonClick}
                 onCorrectButtonClick={handleCorrectButtonClick}
+                text1={`${teamName.team1} 정답`}
+                text2={`${teamName.team2} 정답`}
+                text3={`${teamName.team3} 정답`}
+                checked1={true}
             />
-        </>
+            <Button>아무도 못맞춤</Button>
+        </PageWrap>
     )
 }

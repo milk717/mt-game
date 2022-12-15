@@ -12,15 +12,15 @@ export const Button = styled.button`
           ? `background-color: #404660;`
           : null
   }
-  color: ${props => props.checked ? `#fff`:`#1E2235`};
-  font-size: ${viewWidthCalc(50,{})};
+  color: ${props => props.checked ? `#fff` : `#1E2235`};
+  font-size: ${viewWidthCalc(50, {})};
   font-weight: 600;
   cursor: pointer;
   margin: 10px;
   padding: 10px;
   text-align: center;
   border: none;
-  width: ${viewWidthCalc(400,{})};
+  width: ${viewWidthCalc(400, {})};
   background-size: 300% 100%;
   border-radius: 50px;
   -o-transition: all .4s ease-in-out;
@@ -35,12 +35,21 @@ export const Button = styled.button`
   }
 `;
 
-export default function ButtonGroup({onBackButtonClick, onPassButtonClick, onCorrectButtonClick}){
-    return(
+export default function ButtonGroup(
+    {
+        onBackButtonClick,
+        onPassButtonClick,
+        onCorrectButtonClick,
+        text1 = '이전',
+        text2 = '패스',
+        text3 = '맞춤',
+        checked1 = false,
+    }) {
+    return (
         <ButtonWrap>
-            <Button onClick={onBackButtonClick}>이전</Button>
-            <Button onClick={onPassButtonClick}>패스</Button>
-            <Button onClick={onCorrectButtonClick} checked={true}>맞춤</Button>
+            <Button onClick={onBackButtonClick} checked={checked1}>{text1}</Button>
+            <Button onClick={onPassButtonClick}>{text2}</Button>
+            <Button onClick={onCorrectButtonClick} checked={true}>{text3}</Button>
         </ButtonWrap>
     )
 }
