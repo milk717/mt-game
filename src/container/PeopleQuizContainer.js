@@ -19,7 +19,7 @@ const ContentWrap = styled.div`
 `
 
 const ImgWrap = styled.img`
-  height: ${viewHeightCalc(720,{})};
+  height: ${viewHeightCalc(650,{})};
 `
 
 const TitleWrap = styled.div`
